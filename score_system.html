@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Score System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+
+        /* botton 下间距 */
+        button {
+            margin-bottom: 10px;
+        }
+
+        /* label 宽度 */
+        label {
+            display: inline-block;
+            width: 100px;
+            text-align-last: justify;
+        }
+
+        /* input 宽度 */
+        input {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 介绍页面 -->
+    <div id="page0">
+        <h2>Score System</h2>
+        <p>
+            Welcome to the Score System page. This page allows you to input scores for different categories and navigate
+            between different pages using arrow keys. Here are some key features:
+        </p>
+        <ul>
+            <li>Use the left and right arrow keys to switch between pages.</li>
+            <li>Use the up and down arrow keys to switch between different score options.</li>
+            <li>Use the tab key to navigate between different score categories.</li>
+            <li>You can load your saved score data when you reopen the page.</li>
+            <mark>Please note that it is important to save your score data to your local storage before closing or
+                refreshing the page.</mark>
+        </ul>
+        <h3> Start Scoring </h3>
+        <button onclick="goToPage(1)">Start</button>
+        <br>
+
+        <h3>Load & Download Scores</h3>
+        <button onclick="loadScores()">Load CSV</button>
+        <button onclick="submit()">Download CSV</button>
+        <br>
+
+        <h3>Page Navigation</h3>
+        <button onclick="goToPage(1)">&lt; &lt; Fisrt</button>
+        <button onclick="nextPage()">Next &gt;</button>
+        <button onclick="goToPage(3)">Last &gt; &gt;</button>
+        <br>
+        <input type="number" id="page0Input" min="1" max="3" placeholder="page">
+        <button onclick="goToPage(document.getElementById('page1Input').value)">Jump</button>
+    </div>
+
+    <!-- 第一页 -->
+    <div id="page1" style="display: none;">
+        <h2>Case #1</h2>
+        <table>
+            <tr>
+                <th>Post</th>
+                <td>Here is the post.</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>Here is the comments.</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>Here is the generated question.</td>
+            </tr>
+            <tr>
+                <th>Answers</th>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Answer 1</td>
+                            <td>Here is the generated answer1.</td>
+                        </tr>
+                        <tr>
+                            <td>Answer 2</td>
+                            <td>Here is the generated answer2.</td>
+                        </tr>
+                        <!-- 可以添加更多的Answer -->
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <h3>Input Scores</h3>
+        <form>
+            <label>Relevance:</label>
+            <input type="number" name="relevance1" min="0" max="3"><br>
+
+            <label>Fluency:</label>
+            <input type="number" name="fluency1" min="0" max="3"><br>
+
+            <label>Engagingness:</label>
+            <input type="number" name="engagingness1" min="0" max="3"><br>
+        </form>
+
+        <h3>Load & Download Scores</h3>
+        <button onclick="loadScores()">Load CSV</button>
+        <button onclick="submit()">Download CSV</button>
+        <br>
+
+        <h3>Page Navigation</h3>
+        <button onclick="goToPage(1)">&lt; &lt; Fisrt</button>
+        <button onclick="previousPage()"> &lt; Prev </button>
+        <button onclick="nextPage()">Next &gt;</button>
+        <button onclick="goToPage(3)">Last &gt; &gt;</button>
+        <br>
+        <input type="number" id="page1Input" min="1" max="3" placeholder="page">
+        <button onclick="goToPage(document.getElementById('page1Input').value)">Jump</button>
+    </div>
+
+    <!-- 第二页 -->
+    <div id="page2" style="display: none;">
+        <h2>Case #2</h2>
+        <table>
+            <tr>
+                <th>Post</th>
+                <td>Here is the post.</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>Here is the comments.</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>Here is the generated question.</td>
+            </tr>
+            <tr>
+                <th>Answers</th>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Answer 1</td>
+                            <td>Here is the generated answer1.</td>
+                        </tr>
+                        <tr>
+                            <td>Answer 2</td>
+                            <td>Here is the generated answer2.</td>
+                        </tr>
+                        <!-- 可以添加更多的Answer -->
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <h3>Input Scores</h3>
+        <form>
+            <label>Relevance:</label>
+            <input type="number" name="relevance2" min="0" max="3"><br>
+
+            <label>Fluency:</label>
+            <input type="number" name="fluency2" min="0" max="3"><br>
+
+            <label>Engagingness:</label>
+            <input type="number" name="engagingness2" min="0" max="3"><br>
+        </form>
+
+        <h3>Load & Download Scores</h3>
+        <button onclick="loadScores()">Load CSV</button>
+        <button onclick="submit()">Download CSV</button>
+        <br>
+
+        <h3>Page Navigation</h3>
+        <button onclick="goToPage(1)">&lt; &lt; Fisrt</button>
+        <button onclick="previousPage()"> &lt; Prev </button>
+        <button onclick="nextPage()">Next &gt;</button>
+        <button onclick="goToPage(3)">Last &gt; &gt;</button>
+        <br>
+        <input type="number" id="page2Input" min="1" max="3" placeholder="page">
+        <button onclick="goToPage(document.getElementById('page2Input').value)">Jump</button>
+    </div>
+
+    <!-- 第三页 -->
+    <div id="page3" style="display: none;">
+        <h2>Case #3</h2>
+        <table>
+            <tr>
+                <th>Post</th>
+                <td>Here is the post.</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>Here is the comments.</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>Here is the generated question.</td>
+            </tr>
+            <tr>
+                <th>Answers</th>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Answer 1</td>
+                            <td>Here is the generated answer1.</td>
+                        </tr>
+                        <tr>
+                            <td>Answer 2</td>
+                            <td>Here is the generated answer2.</td>
+                        </tr>
+                        <!-- 可以添加更多的Answer -->
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <h3>Input Scores</h3>
+        <form>
+            <label>Relevance:</label>
+            <input type="number" name="relevance3" min="0" max="3"><br>
+
+            <label>Fluency:</label>
+            <input type="number" name="fluency3" min="0" max="3"><br>
+
+            <label>Engagingness:</label>
+            <input type="number" name="engagingness3" min="0" max="3"><br>
+        </form>
+
+        <h3>Load & Download Scores</h3>
+        <button onclick="loadScores()">Load CSV</button>
+        <button onclick="submit()">Download CSV</button>
+        <br>
+
+        <h3>Page Navigation</h3>
+        <button onclick="goToPage(1)">&lt; &lt; Fisrt</button>
+        <button onclick="PreviousiousPage()"> &lt; Prev </button>
+        <button onclick="goToPage(3)">Last &gt; &gt;</button>
+        <br>
+        <input type="number" id="page3Input" min="1" max="3" placeholder="page">
+        <button onclick="goToPage(document.getElementById('page3Input').value)">Jump</button>
+    </div>
+
+    <!-- 下载按钮 -->
+    <a id="downloadLink" download="scores.csv" href="#" style="display: none;">下载</a>
+
+    <script>
+        var currentPage = 0;    // 当前页
+        var scores = {};        // 评分数据   
+        const introPage = 0;    // 介绍页面     
+        const firstPage = 0;    // 第一页
+        const lastPage = 3;     // 最后一页
+
+        // Next
+        function nextPage() {
+            // 保存当前页的评分
+            saveScores();
+
+            // 显示Next
+            if (currentPage != lastPage) {
+                document.getElementById("page" + currentPage).style.display = "none";
+                currentPage++;
+                document.getElementById("page" + currentPage).style.display = "block";
+            }
+        }
+
+        // Prev
+        function previousPage() {
+            // 保存当前页的评分
+            saveScores();
+
+            // 显示Prev
+            if (currentPage != firstPage) {
+                document.getElementById("page" + currentPage).style.display = "none";
+                currentPage--;
+                document.getElementById("page" + currentPage).style.display = "block";
+            }
+        }
+
+        // 使用左右方向键翻页
+        document.addEventListener("keydown", function (event) {
+            // 如果按下的是方向键右或下，则调用nextPage()函数
+            if (event.key == "ArrowRight") {
+                nextPage();
+            }
+            // 如果按下的是方向键左或上，则调用previousPage()函数
+            else if (event.key == "ArrowLeft") {
+                previousPage();
+            }
+        });
+
+        // 跳转到指定页
+        function goToPage(page) {
+            // 保存当前页的评分
+            saveScores();
+            // 显示指定页
+            document.getElementById("page" + currentPage).style.display = "none";
+            currentPage = page;
+            document.getElementById("page" + currentPage).style.display = "block";
+            // 更新输入框的默认值为 currentPage 的值
+            document.getElementsByName('gotoPage')[0].value = currentPage;
+
+        }
+
+        // 将评分保存到缓存
+        function saveScores() {
+            if (currentPage != introPage) {
+                // 获取当前页的评分
+                var relevance = parseInt(document.getElementsByName("relevance" + currentPage)[0].value);
+                var fluency = parseInt(document.getElementsByName("fluency" + currentPage)[0].value);
+                var engagingness = parseInt(document.getElementsByName("engagingness" + currentPage)[0].value);
+
+                // 保存评分到对象中
+                scores[currentPage] = [relevance, fluency, engagingness];
+            }
+        }
+
+        // 从本地加载评分
+        function loadScores() {
+            // 创建一个 input 元素并设置属性
+            var input = document.createElement("input");
+            input.type = "file";
+            input.accept = ".csv";
+            input.addEventListener("change", function (event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var csv = reader.result;
+                    // 将 CSV 解析为对象
+                    var scoresArray = Papa.parse(csv, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function (results) {
+                            console.log(results.data);
+                        }
+                    }).data;
+                    // 将对象转换为 scores 字典
+                    scores = {};
+                    for (var i = 0; i < scoresArray.length; i++) {
+                        var row = scoresArray[i];
+                        var pageNum = parseInt(row.page_num);
+                        var relevance = parseInt(row.Relevance);
+                        var fluency = parseInt(row.Fluency);
+                        var engagingness = parseInt(row.Engagingness);
+                        scores[pageNum] = [relevance, fluency, engagingness];
+                    }
+                    // 更新页面上的分数
+                    updateScores();
+                    // 提醒用户已加载数据
+                    alert("已加载数据：" + file.name);
+                };
+                reader.readAsText(file);
+            });
+            // 触发点击事件
+            input.click();
+        }
+
+        // 更新页面上的分数
+        function updateScores() {
+            for (var pageNum in scores) {
+                document.getElementsByName("relevance" + pageNum)[0].value = scores[pageNum][0];
+                document.getElementsByName("fluency" + pageNum)[0].value = scores[pageNum][1];
+                document.getElementsByName("engagingness" + pageNum)[0].value = scores[pageNum][2];
+            }
+        }
+
+        // 生成 CSV 文件内容
+        function submit() {
+            // 保存最后一页的评分
+            saveScores();
+
+            // 生成 CSV 文件内容
+            var csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "page_num,Relevance,Fluency,Engagingness\n";
+            for (var key in scores) {
+                csvContent += key + "," + scores[key].join(",") + "\n";
+            }
+
+            // 创建并点击下载链接
+            var dateTime = new Date().toISOString().replace(/T/, '-').replace(/\..+/, '').replace(/:/g, '-');
+            var fileName = "scores-" + dateTime + ".csv";
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", fileName);
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        // 离开页面时提示用户是否下载最新数据
+        window.addEventListener('beforeunload', function (event) {
+            event.preventDefault();
+            event.returnValue = '请确保数据已保存到本地！';
+        });
+    </script>
+</body>
+
+</html>
