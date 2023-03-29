@@ -69,7 +69,7 @@
         <br>
 
         <h3>Page Navigation</h3>
-        <button onclick="goToPage(1)">&lt; &lt; Fisrt</button>
+        <button onclick="goToPage(0)">&lt; &lt; Fisrt</button>
         <button onclick="nextPage()">Next &gt;</button>
         <button onclick="goToPage(3)">Last &gt; &gt;</button>
         <br>
@@ -114,15 +114,15 @@
         <h3>Input Scores</h3>
         <form>
             <label>Relevance:</label>
-            <input type="number" name="relevance1" min="0" max="3"><br>
+            <input type="number" name="relevance1" min="0" max="3" onchange="checkInput(this)"><br>
 
             <label>Fluency:</label>
-            <input type="number" name="fluency1" min="0" max="3"><br>
+            <input type="number" name="fluency1" min="0" max="3" onchange="checkInput(this)"><br>
 
             <label>Engagingness:</label>
-            <input type="number" name="engagingness1" min="0" max="3"><br>
+            <input type="number" name="engagingness1" min="0" max="3" onchange="checkInput(this)"><br>
         </form>
-        
+
         <h3>Check Progress</h3>
         <button onclick="checkProgress()">Check Progress</button>
         <br>
@@ -133,13 +133,13 @@
         <br>
 
         <h3>Page Navigation</h3>
-        <button onclick="goToPage(1)">&lt; &lt; Fisrt</button>
+        <button onclick="goToPage(0)">&lt; &lt; Fisrt</button>
         <button onclick="previousPage()"> &lt; Prev </button>
         <button onclick="nextPage()">Next &gt;</button>
         <button onclick="goToPage(3)">Last &gt; &gt;</button>
         <br>
         <input type="number" id="page1Input" min="1" max="3" placeholder="page">
-        <button onclick="goToPage(document.getElementById('page1Input').value)">Jump</button>        
+        <button onclick="goToPage(document.getElementById('page1Input').value)">Jump</button>
     </div>
 
     <!-- 第二页 -->
@@ -179,13 +179,13 @@
         <h3>Input Scores</h3>
         <form>
             <label>Relevance:</label>
-            <input type="number" name="relevance2" min="0" max="3"><br>
+            <input type="number" name="relevance2" min="0" max="3" onchange="checkInput(this)"><br>
 
             <label>Fluency:</label>
-            <input type="number" name="fluency2" min="0" max="3"><br>
+            <input type="number" name="fluency2" min="0" max="3" onchange="checkInput(this)"><br>
 
             <label>Engagingness:</label>
-            <input type="number" name="engagingness2" min="0" max="3"><br>
+            <input type="number" name="engagingness2" min="0" max="3" onchange="checkInput(this)"><br>
         </form>
 
         <h3>Check Progress</h3>
@@ -198,7 +198,7 @@
         <br>
 
         <h3>Page Navigation</h3>
-        <button onclick="goToPage(1)">&lt; &lt; Fisrt</button>
+        <button onclick="goToPage(0)">&lt; &lt; Fisrt</button>
         <button onclick="previousPage()"> &lt; Prev </button>
         <button onclick="nextPage()">Next &gt;</button>
         <button onclick="goToPage(3)">Last &gt; &gt;</button>
@@ -244,13 +244,13 @@
         <h3>Input Scores</h3>
         <form>
             <label>Relevance:</label>
-            <input type="number" name="relevance3" min="0" max="3"><br>
+            <input type="number" name="relevance3" min="0" max="3" onchange="checkInput(this)"><br>
 
             <label>Fluency:</label>
-            <input type="number" name="fluency3" min="0" max="3"><br>
+            <input type="number" name="fluency3" min="0" max="3" onchange="checkInput(this)"><br>
 
             <label>Engagingness:</label>
-            <input type="number" name="engagingness3" min="0" max="3"><br>
+            <input type="number" name="engagingness3" min="0" max="3" onchange="checkInput(this)"><br>
         </form>
 
         <h3>Check Progress</h3>
@@ -263,7 +263,7 @@
         <br>
 
         <h3>Page Navigation</h3>
-        <button onclick="goToPage(1)">&lt; &lt; Fisrt</button>
+        <button onclick="goToPage(0)">&lt; &lt; Fisrt</button>
         <button onclick="PreviousiousPage()"> &lt; Prev </button>
         <button onclick="goToPage(3)">Last &gt; &gt;</button>
         <br>
@@ -280,6 +280,8 @@
         const introPage = 0;    // 介绍页面     
         const firstPage = 1;    // case 第一页
         const lastPage = 3;     // case 最后一页
+        const minScore = 0;     // 最小评分
+        const maxScore = 3;     // 最大评分
 
         // Next
         function nextPage() {
@@ -329,7 +331,14 @@
             document.getElementById("page" + currentPage).style.display = "block";
             // 更新输入框的默认值为 currentPage 的值
             document.getElementsByName('gotoPage')[0].value = currentPage;
+        }
 
+        // 检查评分是否在范围内
+        function checkInput(input) {
+            if (input.value < minScore || input.value > maxScore) {
+                alert("input is invalid");
+                input.value = "";
+            }
         }
 
         // 将评分保存到缓存
@@ -377,7 +386,7 @@
                     // 更新页面上的分数
                     updateScores();
                     // 提醒用户已加载数据
-                    alert("已加载数据：" + file.name);
+                    alert("Loaded data: " + file.name);
                 };
                 reader.readAsText(file);
             });
@@ -435,8 +444,6 @@
                 alert("The scores for all pages have been completed.");
             }
         }
-
-
 
         // 离开页面时提示用户
         window.addEventListener('beforeunload', function (event) {
