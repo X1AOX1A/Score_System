@@ -336,7 +336,7 @@
         // 检查评分是否在范围内
         function checkInput(input) {
             if (input.value < minScore || input.value > maxScore) {
-                alert("input is invalid");
+                alert("input is invalid, please input a number between " + minScore + " and " + maxScore + ".");
                 input.value = "";
             }
         }
