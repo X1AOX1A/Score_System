@@ -438,7 +438,8 @@
                 }
             }
             if (incompletePages.length > 0) {
-                var message = "The following pages have incomplete scores:\n" + incompletePages.join(", ");
+                var message = "There are " + incompletePages.length +
+                " pages with incomplete scores:\n" + incompletePages.join(", ");
                 alert(message);
             } else {
                 alert("The scores for all pages have been completed.");
