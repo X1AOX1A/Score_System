@@ -59,6 +59,10 @@
         <button onclick="goToPage(1)">Start</button>
         <br>
 
+        <h3>Check Progress</h3>
+        <button onclick="checkProgress()">Check Progress</button>
+        <br>
+
         <h3>Load & Download Scores</h3>
         <button onclick="loadScores()">Load CSV</button>
         <button onclick="submit()">Download CSV</button>
@@ -118,6 +122,10 @@
             <label>Engagingness:</label>
             <input type="number" name="engagingness1" min="0" max="3"><br>
         </form>
+        
+        <h3>Check Progress</h3>
+        <button onclick="checkProgress()">Check Progress</button>
+        <br>
 
         <h3>Load & Download Scores</h3>
         <button onclick="loadScores()">Load CSV</button>
@@ -131,7 +139,7 @@
         <button onclick="goToPage(3)">Last &gt; &gt;</button>
         <br>
         <input type="number" id="page1Input" min="1" max="3" placeholder="page">
-        <button onclick="goToPage(document.getElementById('page1Input').value)">Jump</button>
+        <button onclick="goToPage(document.getElementById('page1Input').value)">Jump</button>        
     </div>
 
     <!-- 第二页 -->
@@ -179,6 +187,10 @@
             <label>Engagingness:</label>
             <input type="number" name="engagingness2" min="0" max="3"><br>
         </form>
+
+        <h3>Check Progress</h3>
+        <button onclick="checkProgress()">Check Progress</button>
+        <br>
 
         <h3>Load & Download Scores</h3>
         <button onclick="loadScores()">Load CSV</button>
@@ -241,6 +253,10 @@
             <input type="number" name="engagingness3" min="0" max="3"><br>
         </form>
 
+        <h3>Check Progress</h3>
+        <button onclick="checkProgress()">Check Progress</button>
+        <br>
+
         <h3>Load & Download Scores</h3>
         <button onclick="loadScores()">Load CSV</button>
         <button onclick="submit()">Download CSV</button>
@@ -262,8 +278,8 @@
         var currentPage = 0;    // 当前页
         var scores = {};        // 评分数据   
         const introPage = 0;    // 介绍页面     
-        const firstPage = 0;    // 第一页
-        const lastPage = 3;     // 最后一页
+        const firstPage = 1;    // case 第一页
+        const lastPage = 3;     // case 最后一页
 
         // Next
         function nextPage() {
@@ -284,7 +300,7 @@
             saveScores();
 
             // 显示Prev
-            if (currentPage != firstPage) {
+            if (currentPage != introPage) {
                 document.getElementById("page" + currentPage).style.display = "none";
                 currentPage--;
                 document.getElementById("page" + currentPage).style.display = "block";
@@ -401,10 +417,30 @@
             link.click();
         }
 
-        // 离开页面时提示用户是否下载最新数据
+        // 检查是否有未完成的页面
+        function checkProgress() {
+            // 保存最后一页的评分
+            saveScores();
+            var incompletePages = [];
+            for (var i = firstPage; i <= lastPage; i++) {
+                var pageScores = scores[i];
+                if (!pageScores || isNaN(pageScores[0]) || isNaN(pageScores[1]) || isNaN(pageScores[2])) {
+                    incompletePages.push(i);
+                }
+            }
+            if (incompletePages.length > 0) {
+                var message = "The following pages have incomplete scores:\n" + incompletePages.join(", ");
+                alert(message);
+            } else {
+                alert("The scores for all pages have been completed.");
+            }
+        }
+
+
+
+        // 离开页面时提示用户
         window.addEventListener('beforeunload', function (event) {
             event.preventDefault();
-            event.returnValue = '请确保数据已保存到本地！';
         });
     </script>
 </body>
