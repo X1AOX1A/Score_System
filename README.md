@@ -11,3 +11,10 @@ Here are some key features:
 **Please note that it is important to save your score data to your local storage before closing or refreshing the page.**
  
 Writen by Yixia Li and ChatGPT.
+
+Here is some screen shots.
+
+![introduction](./screen_shots/introduction.png)
+![page1](./screen_shots/page1.png)
+![page2](./screen_shots/page2.png)
+![page3](./screen_shots/page3.png)
