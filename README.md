@@ -12,7 +12,7 @@ Here are some key features:
  
 Writen by Yixia Li and ChatGPT.
 
-Here is some screen shots.
+Here are some screen shots.
 
 ![introduction](./screen_shots/introduction.png)
 ![page1](./screen_shots/page1.png)
