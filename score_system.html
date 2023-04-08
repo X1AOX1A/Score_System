@@ -423,7 +423,7 @@
             }
 
             // 创建并点击下载链接
-            var dateTime = new Date().toISOString().replace(/T/, '-').replace(/\..+/, '').replace(/:/g, '-');
+            var dateTime = new Date().toLocaleString('zh-CN').replace(/\//g, '-');
             var fileName = "scores-" + dateTime + ".csv";
             var encodedUri = encodeURI(csvContent);
             var link = document.createElement("a");
