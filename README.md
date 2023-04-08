@@ -1,5 +1,5 @@
 # Simple HTML Score System
-Welcome to the Score System. This [page](./score_system.html) allows you to input scores for different categories and navigate between different pages using arrow keys. 
+Welcome to the Score System. This [page](https://htmlpreview.github.io/?https://github.com/X1AOX1A/Score_System/blob/main/score_system.html) allows you to input scores for different categories and navigate between different pages using arrow keys. 
 
 Here are some key features:
 
